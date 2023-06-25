@@ -1,7 +1,7 @@
 package com.lt.moneytransfer.resource;
 
 import com.lt.moneytransfer.model.entity.Agencia;
-import com.lt.moneytransfer.service.AgenciaService;
+import com.lt.moneytransfer.service.IAgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 public class AgenciaResource {
 
     @Autowired
-    private AgenciaService agenciaService;
+    private IAgenciaService agenciaService;
 
     public ResponseEntity<List<Agencia>> findAll() {
 

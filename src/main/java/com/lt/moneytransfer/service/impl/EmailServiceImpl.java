@@ -1,8 +1,9 @@
-package com.lt.moneytransfer.service;
+package com.lt.moneytransfer.service.impl;
 
 import com.lt.moneytransfer.model.dto.Contacto;
 import com.lt.moneytransfer.model.dto.Documentacion;
 import com.lt.moneytransfer.model.dto.Reclamacion;
+import com.lt.moneytransfer.service.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 
 import javax.mail.internet.MimeMessage;
-import java.util.List;
 
 @Service
 public class EmailServiceImpl implements IEmailService {

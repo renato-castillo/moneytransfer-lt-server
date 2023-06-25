@@ -1,7 +1,6 @@
 package com.lt.moneytransfer.resource;
 
 import com.lt.moneytransfer.config.ConfigProperties;
-import com.lt.moneytransfer.model.dto.Contacto;
 import com.lt.moneytransfer.model.dto.Reclamacion;
 import com.lt.moneytransfer.service.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,8 @@
-package com.lt.moneytransfer.service;
+package com.lt.moneytransfer.service.impl;
 
 import com.lt.moneytransfer.model.entity.Agencia;
 import com.lt.moneytransfer.repository.IAgenciaRepository;
+import com.lt.moneytransfer.service.IAgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AgenciaService implements IAgenciaService {
+public class AgenciaServiceImpl implements IAgenciaService {
 
     @Autowired
     private IAgenciaRepository agenciaRepository;
