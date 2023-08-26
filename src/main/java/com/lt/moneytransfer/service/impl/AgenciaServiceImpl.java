@@ -5,6 +5,7 @@ import com.lt.moneytransfer.repository.IAgenciaRepository;
 import com.lt.moneytransfer.service.IAgenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -17,11 +18,13 @@ public class AgenciaServiceImpl implements IAgenciaService {
     private IAgenciaRepository agenciaRepository;
 
     @Override
+    @Transactional
     public Agencia save(Agencia agencia) {
         return agenciaRepository.save(agencia);
     }
 
     @Override
+    @Transactional
     public void delete(BigInteger id) {
         agenciaRepository.deleteById(id);
     }

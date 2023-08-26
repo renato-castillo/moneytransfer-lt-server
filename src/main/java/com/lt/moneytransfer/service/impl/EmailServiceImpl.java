@@ -52,6 +52,7 @@ public class EmailServiceImpl implements IEmailService {
     }
 
     @Override
+    @Async
     public ResponseEntity<?> sendEmailWithAttachments(String para, String de, Reclamacion reclamacion) {
         MimeMessageHelper helper = null;
         MimeMessage message = null;

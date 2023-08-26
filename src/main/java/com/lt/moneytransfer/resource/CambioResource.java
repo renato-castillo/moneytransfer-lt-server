@@ -34,9 +34,13 @@ public class CambioResource {
 
     public ResponseEntity<List<Pais>> obtenerPaisesCambio(BigInteger paisId) {
 
-        List<BigInteger> monedaIds = paisService.findAll().stream().filter(pais -> Objects.equals(pais.getPaisId(), paisId)).map(x -> x.getMoneda().getMonedaId()).collect(Collectors.toList());
+        Pais pais = paisService.findById(paisId).orElse(null);
 
-        List<TipoCambio> tipoCambios = tipoCambioService.findAllByMonedaOrigenIn(monedaIds);
+        if(pais == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        List<TipoCambio> tipoCambios = tipoCambioService.findAllByMonedaOrigenIs(pais.getMoneda().getMonedaId());
 
         if(tipoCambios.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,17 +54,51 @@ public class CambioResource {
         return new ResponseEntity<>(paises, HttpStatus.OK);
     }
 
-    /*
-    public ResponseEntity<TipoCambio> obtenerTipoCambio(BigInteger monedaId, BigInteger monedaDestinoId) {
+    public ResponseEntity<TipoCambio> registrarTipoCambio(TipoCambio tipoCambio) {
 
-        Optional<TipoCambio> tipoCambio = tipoCambioService.findByMonedaOrigen_MonedaIdIsAndMonedaDestino_MonedaIdIs(monedaId, monedaDestinoId);;
+        Optional<TipoCambio> tipoCambioExiste = tipoCambioService.findByMonedaOrigenIdIsAndMonedaDestinoIdIs(tipoCambio.getMonedaOrigen().getMonedaId(), tipoCambio.getMonedaDestino().getMonedaId());
 
-        if(!tipoCambio.isPresent()) {
+        if(tipoCambioExiste.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        tipoCambio = tipoCambioService.save(tipoCambio);
+
+        return new ResponseEntity<>(tipoCambio, HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<TipoCambio> editarTipoCambio(TipoCambio tipoCambio) {
+
+        Optional<TipoCambio> tipoCambioExiste = tipoCambioService.findById(tipoCambio.getTipoCambioId());
+
+        if(!tipoCambioExiste.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(tipoCambio.get(), HttpStatus.OK);
-    }*/
+        tipoCambio = tipoCambioService.save(tipoCambio);
 
+        return new ResponseEntity<>(tipoCambio, HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<List<TipoCambio>> listarTiposCambio() {
+        List<TipoCambio> tipoCambios = tipoCambioService.findAll();
+
+        return new ResponseEntity<>(tipoCambios, HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<?> eliminarTipoCambio(BigInteger tipoCambioId) {
+        TipoCambio tipoCambio = tipoCambioService.findById(tipoCambioId).orElse(null);
+
+        if(tipoCambio == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        tipoCambioService.delete(tipoCambioId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

@@ -13,4 +13,8 @@ public interface ITipoCambioService extends ICRUD<TipoCambio, BigInteger> {
 
     List<TipoCambio> findAllByMonedaOrigenIn(List<BigInteger> monedaIds);
 
+    List<TipoCambio> findAllByMonedaOrigenIs(BigInteger monedaId);
+
+    Optional<TipoCambio> findByMonedaOrigenIdIsAndMonedaDestinoIdIs(BigInteger monedaOrigenId, BigInteger monedaDestinoId);
+
 }

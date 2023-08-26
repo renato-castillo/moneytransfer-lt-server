@@ -15,4 +15,10 @@ public interface ITipoCambioRepository extends JpaRepository<TipoCambio, BigInte
     @Query(value = "SELECT tc FROM TipoCambio tc WHERE tc.monedaOrigen.monedaId IN (?1)")
     List<TipoCambio> findAllByMonedaOrigenIn(List<BigInteger> monedaIds);
 
+    @Query(value = "SELECT tc FROM TipoCambio tc WHERE tc.monedaOrigen.monedaId = ?1")
+    List<TipoCambio> findAllByMonedaOrigenIs(BigInteger monedaId);
+
+    @Query(value = "SELECT tc FROM TipoCambio tc WHERE tc.monedaOrigen.monedaId = ?1 AND tc.monedaDestino.monedaId = ?2")
+    Optional<TipoCambio> findByMonedaOrigenIdIsAndMonedaDestinoIdIs(BigInteger monedaOrigenId, BigInteger monedaDestinoId);
+
 }

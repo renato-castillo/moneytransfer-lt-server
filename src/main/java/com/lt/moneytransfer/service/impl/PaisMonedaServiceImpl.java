@@ -5,6 +5,7 @@ import com.lt.moneytransfer.repository.IPaisMonedaRepository;
 import com.lt.moneytransfer.service.IPaisMonedaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -17,11 +18,13 @@ public class PaisMonedaServiceImpl implements IPaisMonedaService {
     private IPaisMonedaRepository paisMonedaRepository;
 
     @Override
+    @Transactional
     public PaisMoneda save(PaisMoneda paisMoneda) {
         return paisMonedaRepository.save(paisMoneda);
     }
 
     @Override
+    @Transactional
     public void delete(BigInteger id) {
         paisMonedaRepository.deleteById(id);
     }
@@ -32,6 +35,7 @@ public class PaisMonedaServiceImpl implements IPaisMonedaService {
     }
 
     @Override
+    @Transactional
     public List<PaisMoneda> saveAll(List<PaisMoneda> t) {
         return paisMonedaRepository.saveAll(t);
     }

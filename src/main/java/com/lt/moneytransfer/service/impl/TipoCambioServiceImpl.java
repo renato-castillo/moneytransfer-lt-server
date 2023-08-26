@@ -5,6 +5,7 @@ import com.lt.moneytransfer.repository.ITipoCambioRepository;
 import com.lt.moneytransfer.service.ITipoCambioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -17,11 +18,13 @@ public class TipoCambioServiceImpl implements ITipoCambioService {
     private ITipoCambioRepository tipoCambioRepository;
 
     @Override
+    @Transactional
     public TipoCambio save(TipoCambio tipoCambio) {
         return tipoCambioRepository.save(tipoCambio);
     }
 
     @Override
+    @Transactional
     public void delete(BigInteger id) {
         tipoCambioRepository.deleteById(id);
     }
@@ -32,6 +35,7 @@ public class TipoCambioServiceImpl implements ITipoCambioService {
     }
 
     @Override
+    @Transactional
     public List<TipoCambio> saveAll(List<TipoCambio> t) {
         return tipoCambioRepository.saveAll(t);
     }
@@ -50,4 +54,15 @@ public class TipoCambioServiceImpl implements ITipoCambioService {
     public List<TipoCambio> findAllByMonedaOrigenIn(List<BigInteger> monedaIds) {
         return tipoCambioRepository.findAllByMonedaOrigenIn(monedaIds);
     }
+
+    @Override
+    public List<TipoCambio> findAllByMonedaOrigenIs(BigInteger monedaId) {
+        return tipoCambioRepository.findAllByMonedaOrigenIs(monedaId);
+    }
+
+    @Override
+    public Optional<TipoCambio> findByMonedaOrigenIdIsAndMonedaDestinoIdIs(BigInteger monedaOrigenId, BigInteger monedaDestinoId) {
+        return tipoCambioRepository.findByMonedaOrigenIdIsAndMonedaDestinoIdIs(monedaOrigenId, monedaDestinoId);
+    }
+
 }

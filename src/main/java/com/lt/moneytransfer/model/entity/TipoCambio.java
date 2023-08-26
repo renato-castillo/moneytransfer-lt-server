@@ -2,9 +2,7 @@ package com.lt.moneytransfer.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Getter
@@ -14,6 +12,7 @@ import java.math.BigInteger;
 public class TipoCambio {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tipocambio_id", columnDefinition = "integer")
     private BigInteger tipoCambioId;
 

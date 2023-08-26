@@ -2,6 +2,7 @@ package com.lt.moneytransfer.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -19,7 +20,7 @@ public class Pais {
 
     private String paisNombre;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "pais_moneda_id", referencedColumnName = "monedaId")
     private Moneda moneda;
 

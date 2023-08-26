@@ -13,16 +13,17 @@ public class GeneralConfiguration {
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("mail.sistemascp.net");
-        mailSender.setPort(25);
+        mailSender.setHost("smtp.serviciodecorreo.es");
+        mailSender.setPort(465);
 
-        mailSender.setUsername("rcastillo@sistemascp.net");
-        mailSender.setPassword("S@ntiago3105");
+        mailSender.setUsername("sac@latintravelmt.com");
+        mailSender.setPassword("mD84nLkObX");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
         return mailSender;
     }

@@ -1,12 +1,12 @@
 use MONEYTRANSFER;
 
-create table agencias(
-                         agencia_id			integer			primary key			auto_increment,
-                         agencia_latitud		double			not null,
-                         agencia_longitud	double			not null,
-                         agencia_titulo		varchar(50)		not null,
-                         agencia_telefono	varchar(10)		not null,
-                         agencia_direccion	varchar(200)	not null
+CREATE TABLE agencias (
+                          agencia_id			INTEGER			PRIMARY KEY			AUTO_INCREMENT,
+                          agencia_latitud		DECIMAL(65,30)	NOT NULL,
+                          agencia_longitud	DECIMAL(65,30)	NOT NULL,
+                          agencia_titulo		VARCHAR(50)		NOT NULL,
+                          agencia_telefono	VARCHAR(10)		NULL,
+                          agencia_direccion	VARCHAR(200)	NOT NULL
 );
 
 create table monedas(
@@ -29,14 +29,14 @@ create table pais_monedas(
 );
 
 create table tipo_cambios(
-                             tipocambio_id					integer			primary key			auto_increment,
-                             tipocambio_moneda_id			integer			not null			references paises(pais_id),
-                             tipocambio_moneda_destino_id	integer			not null			references paises(pais_id),
-                             tipocambio_cambio				double			not null
+                             tipocambio_id					integer				primary key			auto_increment,
+                             tipocambio_moneda_id			integer				not null			references paises(pais_id),
+                             tipocambio_moneda_destino_id	integer				not null			references paises(pais_id),
+                             tipocambio_cambio				decimal(65,30)		not null
 );
 
 insert into agencias(agencia_latitud, agencia_longitud, agencia_titulo, agencia_telefono, agencia_direccion)
-VALUES(-12.0652008, -77.1562112, 'titulo 1', '96586586', 'san vicente');
+VALUES(-12.0652008, -0.390801517, 'titulo 1', '96586586', 'san vicente');
 
 insert into monedas(moneda_nombre, moneda_simbolo) VALUES('Euro', '€');
 insert into monedas(moneda_nombre, moneda_simbolo) VALUES('Peso Colombiano', 'COP');
@@ -44,8 +44,9 @@ insert into monedas(moneda_nombre, moneda_simbolo) VALUES('Peso Colombiano', 'CO
 insert into paises(pais_nombre, pais_moneda_id) VALUES('España', 1);
 insert into paises(pais_nombre, pais_moneda_id) VALUES('Colombia', 2);
 
-insert into tipo_cambios(tipocambio_moneda_id, tipocambio_moneda_destino_id, tipocambio_cambio)
-VALUES(1, 2, 4455.09)
 
 insert into tipo_cambios(tipocambio_moneda_id, tipocambio_moneda_destino_id, tipocambio_cambio)
+VALUES(1, 2, 4455.03399)
+
+    insert into tipo_cambios(tipocambio_moneda_id, tipocambio_moneda_destino_id, tipocambio_cambio)
 VALUES(2, 1, 0.00022)
